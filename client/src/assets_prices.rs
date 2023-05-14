@@ -6,7 +6,7 @@ use rocket::State;
 use rocket::tokio::sync::Mutex;
 use serde::Deserialize;
 
-#[post("/assets/prices", format = "json", data = "<request>")]
+#[post("/v1/assets/prices", format = "json", data = "<request>")]
 pub async fn get_assets_prices(request: Json<AssetPriceRequest>, price_client: &State<Mutex<PriceClient>>,) -> Json<Vec<AssetPriceResponse>> {
     let mut response = Vec::new();
     let asset_ids = request.assets.iter().map(|x| x.as_str()).collect();
