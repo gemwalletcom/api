@@ -1,10 +1,22 @@
-[package]
-name = "api"
+[workspace.package]
+version = "1.0.0"
 edition = "2021"
-version = "0.0.1"
 
-[dependencies]
-rocket = { version = "=0.5.0-rc.3", features = ["json"] }
+[workspace]
+members = [
+    "bin/deamon",
+    "bin/client",
+    "redis_client",
+    "price_client",
+]
+
+default-members = [
+    "bin/deamon",
+    "bin/client",
+]
+
+[workspace.dependencies]
 serde = { version = "1.0.163", features = ["derive"] }
-serde_json = "1.0.96"
-rocket-client-addr = "0.5.2"
+serde_json = { version = "1.0.96" } 
+tokio = { version = "1", features = ["full"] }
+redis = { version = "0.23.0", features = ["tokio-comp", "json"] }

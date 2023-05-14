@@ -1,6 +1,6 @@
 extern crate rocket;
 use rocket::serde::json::Json;
-use serde::Serialize;   
+use rocket::serde::Serialize;   
 use std::time::{SystemTime, UNIX_EPOCH};
 
 #[get("/")]

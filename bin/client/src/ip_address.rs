@@ -1,5 +1,4 @@
 extern crate rocket;
-
 use rocket::serde::Serialize;
 use rocket::serde::json::Json;
 use rocket_client_addr::ClientRealAddr;
