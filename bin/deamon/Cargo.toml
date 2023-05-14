@@ -1,5 +1,5 @@
 [package]
-name = "deamon"
+name = "gem-deamon"
 edition = { workspace = true }
 version = { workspace = true }
 

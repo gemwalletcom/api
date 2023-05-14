@@ -108,18 +108,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "baf1de4339761588bc0619e3cbc0120ee582ebb74b53b4efbf79117bd2da40fd"
 
 [[package]]
-name = "client"
-version = "1.0.0"
-dependencies = [
- "price_client",
- "rocket",
- "rocket-client-addr",
- "serde",
- "serde_json",
- "tokio",
-]
-
-[[package]]
 name = "combine"
 version = "4.6.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -177,16 +165,6 @@ checksum = "1bfb12502f3fc46cca1bb51ac28df9d618d813cdc3d2f25b9fe775a34af26bb3"
 dependencies = [
  "generic-array",
  "typenum",
-]
-
-[[package]]
-name = "deamon"
-version = "1.0.0"
-dependencies = [
- "price_client",
- "serde",
- "serde_json",
- "tokio",
 ]
 
 [[package]]
@@ -394,6 +372,28 @@ dependencies = [
  "pin-project-lite",
  "pin-utils",
  "slab",
+]
+
+[[package]]
+name = "gem-client"
+version = "1.0.0"
+dependencies = [
+ "price_client",
+ "rocket",
+ "rocket-client-addr",
+ "serde",
+ "serde_json",
+ "tokio",
+]
+
+[[package]]
+name = "gem-deamon"
+version = "1.0.0"
+dependencies = [
+ "price_client",
+ "serde",
+ "serde_json",
+ "tokio",
 ]
 
 [[package]]
