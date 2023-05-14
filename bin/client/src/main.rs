@@ -6,7 +6,7 @@ mod assets_prices;
 use rocket::fairing::AdHoc;
 use rocket::{Build, Rocket};
 use std::env;
-use price_client::PriceClient;
+use price_client::price_client::PriceClient;
 use rocket::tokio::sync::Mutex;
 
 async fn rocket() -> Rocket<Build> {

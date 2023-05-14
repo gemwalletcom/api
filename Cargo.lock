@@ -183,7 +183,6 @@ dependencies = [
 name = "deamon"
 version = "1.0.0"
 dependencies = [
- "ethaddr",
  "price_client",
  "serde",
  "serde_json",
@@ -916,6 +915,7 @@ checksum = "5b40af805b3121feab8a3c29f04d8ad262fa8e0561883e7653e024ae4479e6de"
 name = "price_client"
 version = "1.0.0"
 dependencies = [
+ "ethaddr",
  "redis",
  "redis_client",
  "reqwest",

@@ -1,7 +1,7 @@
 extern crate rocket;
 use rocket::serde::json::Json;
 use rocket::serde::Serialize;
-use price_client::PriceClient;
+use price_client::price_client::PriceClient;
 use rocket::State;
 use rocket::tokio::sync::Mutex;
 use serde::Deserialize;

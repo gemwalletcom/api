@@ -28,9 +28,9 @@ pub struct CoinGeckoClient {
 }
 
 impl CoinGeckoClient {
-    pub async fn new() -> Result<Self, Error> {
+    pub fn new() -> Self {
         let client = reqwest::Client::new();
-        Ok(Self { client })
+        Self { client }
     }
 
     pub fn convert_coin_vec_to_map(coins: Vec<Coin>) -> HashMap<String, Coin> {
@@ -39,7 +39,6 @@ impl CoinGeckoClient {
 
     pub async fn get_coin_list(&self) -> Result<Vec<Coin>, Error> {
         let url = format!("{}/api/v3/coins/list?include_platform=true", COINGECKO_API_URL);
-        println!("url: {}", url);
         let response = self.client.get(&url).send().await?;
         let coins: Vec<Coin> = response.json().await?;
         Ok(coins)
@@ -53,7 +52,6 @@ impl CoinGeckoClient {
         let mut headers = HeaderMap::new();
         headers.insert(USER_AGENT, HeaderValue::from_static("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"));
         let response = self.client.get(&url).headers(headers).send().await?;
-        println!("response: {:?}", response);
         let coin_markets: Vec<CoinMarket> = response.json().await?;
         Ok(coin_markets)
     }
