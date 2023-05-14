@@ -10,7 +10,7 @@ use price_client::PriceClient;
 use rocket::tokio::sync::Mutex;
 
 async fn rocket() -> Rocket<Build> {
-    let database_url = env::var("REDIS_URL").expect("DATABASE_URL not set");
+    let database_url = env::var("REDIS_URL").expect("REDIS_URL not set");
 
     let price_client = PriceClient::new(database_url.as_str()).await.unwrap();
 
