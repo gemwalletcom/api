@@ -10,23 +10,23 @@ pub struct PriceClient {
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct AssetPrice {
-    pub asset: String,
+    pub asset_id: String,
     pub price: f64,
-    pub price_change: f64,
+    pub price_change_24h: f64,
     pub last_updated: u64,
 }
 
 impl AssetPrice {
-    pub fn new(asset: String, price: f64, price_change: f64) -> Self {
+    pub fn new(asset_id: String, price: f64, price_change_24h: f64) -> Self {
         let last_updated = SystemTime::now()
             .duration_since(UNIX_EPOCH)
             .expect("Failed to get system time")
             .as_secs();
 
         AssetPrice {
-            asset,
+            asset_id,
             price,
-            price_change,
+            price_change_24h,
             last_updated,
         }
     }
@@ -44,7 +44,7 @@ impl PriceClient {
     }
 
     pub fn convert_asset_price_vec_to_map(coins: Vec<AssetPrice>) -> HashMap<String, AssetPrice> {
-        coins.into_iter().map(|coin| (coin.asset.clone(), coin)).collect()
+        coins.into_iter().map(|coin| (coin.asset_id.clone(), coin)).collect()
     }
 
     pub fn asset_key(&mut self, asset: String) -> String {
@@ -56,7 +56,7 @@ impl PriceClient {
         .iter()
         .map(|x| {
             (
-                self.asset_key(x.asset.clone()),
+                self.asset_key(x.asset_id.clone()),
                 serde_json::to_string(x).unwrap(),
             )
         })
