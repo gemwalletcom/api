@@ -4,15 +4,15 @@ edition = "2021"
 
 [workspace]
 members = [
-    "bin/deamon",
-    "bin/client",
+    "deamon",
+    "client",
     "redis_client",
     "price_client",
 ]
 
 default-members = [
-    "bin/deamon",
-    "bin/client",
+    "deamon",
+    "client",
 ]
 
 [workspace.dependencies]
