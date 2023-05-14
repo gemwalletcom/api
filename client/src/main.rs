@@ -24,7 +24,9 @@ async fn rocket() -> Rocket<Build> {
         }))
         .manage(Mutex::new(price_client))
         .mount("/", routes![
-            status::get_status, 
+            status::get_status,
+        ])
+        .mount("/v1", routes![
             ip_address::get_ip_address,
             assets_prices::get_assets_prices,
         ])
