@@ -12,7 +12,7 @@ services:
         BINARY: client
         REDIS_URL: "redis://default:@redis:6379"
     ports:
-      - "8000:8000"
+      - "80:8000"
     depends_on:
       - app_build
       - redis
