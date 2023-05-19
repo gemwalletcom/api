@@ -25,12 +25,13 @@ pub struct CoinMarket {
 #[derive(Clone)]
 pub struct CoinGeckoClient {
     client: reqwest::Client,
+    api_key: String,
 }
 
 impl CoinGeckoClient {
-    pub fn new() -> Self {
+    pub fn new(api_key: String) -> Self {
         let client = reqwest::Client::new();
-        Self { client }
+        Self { client, api_key }
     }
 
     pub fn convert_coin_vec_to_map(coins: Vec<Coin>) -> HashMap<String, Coin> {
@@ -38,7 +39,7 @@ impl CoinGeckoClient {
     }
 
     pub async fn get_coin_list(&self) -> Result<Vec<Coin>, Error> {
-        let url = format!("{}/api/v3/coins/list?include_platform=true", COINGECKO_API_URL);
+        let url = format!("{}/api/v3/coins/list?include_platform=true&x_cg_pro_api_key={}", COINGECKO_API_URL, self.api_key);
         let response = self.client.get(&url).send().await?;
         let coins: Vec<Coin> = response.json().await?;
         Ok(coins)
@@ -46,8 +47,8 @@ impl CoinGeckoClient {
 
     pub async fn get_coin_markets(&self, page: u32, per_page: u32) -> Result<Vec<CoinMarket>, Error> {
         let url = format!(
-            "{}/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page={}&page={}&sparkline=false&locale=en",
-            COINGECKO_API_URL, per_page, page
+            "{}/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page={}&page={}&sparkline=false&locale=en&x_cg_pro_api_key={}",
+            COINGECKO_API_URL, per_page, page, self.api_key
         );
         let mut headers = HeaderMap::new();
         headers.insert(USER_AGENT, HeaderValue::from_static("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"));
