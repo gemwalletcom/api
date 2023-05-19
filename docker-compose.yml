@@ -10,7 +10,7 @@ services:
     environment:
         ROCKET_ADDRESS: 0.0.0.0
         BINARY: client
-        REDIS_URL: "redis://default:@redis:6379"
+        REDIS_URL: "redis://default:@localhost:6379"
     ports:
       - "8000:8000"
       - "443:8000"
@@ -21,7 +21,7 @@ services:
     image: app
     environment:
       BINARY: deamon
-      REDIS_URL: "redis://default:@redis:6379"
+      REDIS_URL: "redis://default:@localhost:6379"
     depends_on:
       - app_build
       - redis
