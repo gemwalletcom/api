@@ -1,10 +1,12 @@
 version: '3.8'
 services:
-  client:
+  app_build:
     image: app
     build:
       context: .
       dockerfile: Dockerfile
+  client:
+    image: app
     environment:
         ROCKET_ADDRESS: 0.0.0.0
         BINARY: client
@@ -12,14 +14,16 @@ services:
     ports:
       - "8000:8000"
     depends_on:
+      - app_build
       - redis
   deamon:
-      image: app
-      environment:
-        BINARY: deamon
-        REDIS_URL: "redis://default:@redis:6379"
-      depends_on:
-        - redis
+    image: app
+    environment:
+      BINARY: deamon
+      REDIS_URL: "redis://default:@redis:6379"
+    depends_on:
+      - app_build
+      - redis
   redis:
     image: redis:6.2-alpine
     restart: always
