@@ -1,0 +1,25 @@
+[workspace.package]
+version = "1.0.0"
+edition = "2021"
+
+[workspace]
+members = [
+    "deamon",
+    "client",
+    "pricer",
+    "fiat",
+]
+
+default-members = [
+    "deamon",
+    "client",
+]
+
+[workspace.dependencies]
+serde = { version = "1.0.163", features = ["derive"] }
+serde_json = { version = "1.0.96" } 
+tokio = { version = "1.28.1"}
+redis = { version = "0.23.0", features = ["tokio-comp", "json"] }
+reqwest = {version = "0.11.17", features = ["json"]}
+url = { version = "2.2.3" }
+config = { version = "0.13.3" }

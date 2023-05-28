@@ -1,0 +1,17 @@
+[package]
+name = "fiat"
+edition = { workspace = true }
+version = { workspace = true }
+
+[dependencies]
+serde = { workspace = true }
+serde_json = { workspace = true }
+tokio = { workspace = true }
+redis = { workspace = true }
+reqwest = { workspace = true }
+url = { workspace = true }
+hmac = "0.12.1"
+sha2 = "0.10.6"
+base64 = "0.21.2"
+futures = "0.3.28"
+redis_client = { path = "../redis_client" }

@@ -1,0 +1,11 @@
+[package]
+name = "deamon"
+edition = { workspace = true }
+version = { workspace = true }
+
+[dependencies]
+serde = { workspace = true }
+serde_json = { workspace = true }
+tokio = { workspace = true }
+pricer = { path = "../pricer" }
+settings = { path = "../settings" }

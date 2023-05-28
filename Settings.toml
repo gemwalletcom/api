@@ -1,0 +1,21 @@
+[redis]
+url = "redis://default:@localhost:6379"
+
+[coingecko.key]
+secret = ""
+
+[moonpay]
+[moonpay.key]
+public = ""
+secret = ""
+
+[transak]
+[transak.key]
+public = ""
+
+[mercuryo]
+[mercuryo.key]
+public = ""
+
+[pricer]
+timer = 180
