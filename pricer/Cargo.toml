@@ -10,4 +10,4 @@ tokio = { workspace = true }
 redis_client = { path = "../redis_client" }
 redis = { workspace = true }
 reqwest = { workspace = true }
-ethaddr = { version = "0.1.2" }
+ethaddr = { workspace = true }
