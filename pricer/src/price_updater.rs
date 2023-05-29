@@ -139,7 +139,8 @@ fn get_chain(id: &str) -> Option<Chain> {
         "binancecoin" => Some(Chain::Binance),
         "ethereum" => Some(Chain::Ethereum),
         "binance-smart-chain" => Some(Chain::SmartChain),
-        "matic-network" => Some(Chain::Polygon),
+        "matic-network" |
+        "polygon-pos" => Some(Chain::Polygon),
         "solana" => Some(Chain::Solana),
         "arbitrum-one" => Some(Chain::Arbitrum),
         "optimistic-ethereum" => Some(Chain::Optimism),
