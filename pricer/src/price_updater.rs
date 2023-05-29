@@ -81,6 +81,7 @@ pub enum Chain {
     Solana,
     Arbitrum,
     Optimism,
+    Thorchain,
 }
 
 impl Chain {
@@ -94,6 +95,7 @@ impl Chain {
             Chain::Solana => "solana",
             Chain::Arbitrum => "arbitrum",
             Chain::Optimism => "optimism",
+            Chain::Thorchain => "thorchain",
         }
     }
 }
@@ -124,7 +126,7 @@ fn format_token_id(chain: Chain, token_id: String) -> String {
         Chain::Arbitrum |
         Chain::Optimism => {
             return Address::from_str(&token_id.as_str()).unwrap().to_string();
-        } 
+        }
         _ => {
             return token_id
         }
@@ -137,10 +139,11 @@ fn get_chain(id: &str) -> Option<Chain> {
         "binancecoin" => Some(Chain::Binance),
         "ethereum" => Some(Chain::Ethereum),
         "binance-smart-chain" => Some(Chain::SmartChain),
-        "polygon-pos" => Some(Chain::Polygon),
+        "matic-network" => Some(Chain::Polygon),
         "solana" => Some(Chain::Solana),
         "arbitrum-one" => Some(Chain::Arbitrum),
         "optimistic-ethereum" => Some(Chain::Optimism),
+        "thorchain" => Some(Chain::Thorchain),
         _ => {
             None
         }
