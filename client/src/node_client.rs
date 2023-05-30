@@ -2,7 +2,7 @@ use std::error::Error;
 use redis_client::RedisClient;
 use serde::{Serialize, Deserialize};
 
-const NODES_KEY: &str = "nodes";
+const NODES_CHAIN_PREFIX: &str = "nodes:chain:";
 
 //TODO: Move client to separate folder
 
@@ -34,6 +34,6 @@ impl Client {
     }
 
     pub async fn get_nodes(&mut self) -> Result<Vec<ChainNode>, Box<dyn Error>> {
-        return self.store.get_value(NODES_KEY).await;
+        return self.store.get_values(NODES_CHAIN_PREFIX).await
     }
 }

@@ -41,6 +41,26 @@ impl RedisClient {
             },
         }
     }
+
+    pub async fn get_values<T>(&mut self, prefix: &str) -> Result<Vec<T>, Box<dyn Error>>
+        where
+            T: DeserializeOwned,
+    {
+        let keys: Vec<String> = self.conn.keys(format!("{}*", prefix)).await?;
+        let response: Vec<Option<String>> = self
+            .conn
+            .mget(keys)
+            .await?;
+        let values: Vec<String> = response.into_iter().flatten().collect();
+
+        let mut results: Vec<T> = Vec::new();
+        for result in values {
+            let value: T = serde_json::from_str(&result)?;
+            results.push(value);
+        }
+
+        Ok(results)
+    }
 }
 
 
