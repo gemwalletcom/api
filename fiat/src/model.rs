@@ -33,9 +33,10 @@ pub enum FiatProviderName {
 }
 
 #[derive(Debug, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct FiatAssets {
     pub version: i64,
-    pub assets: Vec<String>
+    pub asset_ids: Vec<String>
 }
 
 impl FiatProviderName {

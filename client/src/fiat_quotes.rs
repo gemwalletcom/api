@@ -43,7 +43,7 @@ pub async fn get_fiat_assets(
     let assets = fiat_client.lock().await.get_assets().await;
     match assets {
         Ok(value) => Json(value),
-        Err(_) => Json(FiatAssets{version: 0, assets: vec![]}),
+        Err(_) => Json(FiatAssets{version: 0, asset_ids: vec![]}),
     }
 }
 
