@@ -82,6 +82,8 @@ pub enum Chain {
     Arbitrum,
     Optimism,
     Thorchain,
+    Cosmos,
+    Osmosis,
 }
 
 impl Chain {
@@ -96,6 +98,8 @@ impl Chain {
             Chain::Arbitrum => "arbitrum",
             Chain::Optimism => "optimism",
             Chain::Thorchain => "thorchain",
+            Chain::Cosmos => "cosmos",
+            Chain::Osmosis => "osmosis",
         }
     }
 }
@@ -145,6 +149,8 @@ fn get_chain(id: &str) -> Option<Chain> {
         "arbitrum-one" => Some(Chain::Arbitrum),
         "optimistic-ethereum" => Some(Chain::Optimism),
         "thorchain" => Some(Chain::Thorchain),
+        "cosmos" => Some(Chain::Cosmos),
+        "osmosis" => Some(Chain::Osmosis),
         _ => {
             None
         }
