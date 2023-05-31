@@ -74,17 +74,13 @@ pub struct FiatProvider {
 
 // mappings
 #[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct FiatMappings {
-    pub version: i32,
-    pub assets: HashMap<String, HashMap<String, FiatMapping>>
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct FiatMapping {
     pub symbol: String,
     pub network: Option<String>
 }
+
+pub type FiatMappingMap = HashMap<String, FiatMapping>;
 
 pub trait FiatClient {
     fn name(&self) -> FiatProviderName;

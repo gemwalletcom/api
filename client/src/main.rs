@@ -50,7 +50,6 @@ async fn rocket(settings: Settings) -> Rocket<Build> {
             assets_prices::get_assets_prices,
             fiat_quotes::get_fiat_quotes,
             fiat_quotes::get_fiat_assets,
-            fiat_quotes::get_fiat_mappings,
             nodes::get_nodes,
         ])
 }

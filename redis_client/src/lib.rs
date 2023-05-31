@@ -26,7 +26,7 @@ impl RedisClient {
         Ok(())
     }
 
-    pub async fn get_value<T>(&mut self, key: &str) -> Result<T, Box<dyn Error>>
+    pub async fn get_value<T>(&mut self, key: &str) -> Result<T, Box<dyn Error + Send + Sync>>
     where
         T: DeserializeOwned,
     {
