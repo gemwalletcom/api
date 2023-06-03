@@ -4,6 +4,9 @@ url = "redis://default:@localhost:6379"
 [coingecko.key]
 secret = ""
 
+[fiat]
+timeout = 3
+
 [moonpay]
 [moonpay.key]
 public = ""

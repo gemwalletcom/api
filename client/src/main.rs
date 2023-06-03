@@ -21,9 +21,10 @@ async fn rocket(settings: Settings) -> Rocket<Build> {
     let redis_url = settings.redis.url.as_str();
     let price_client = PriceClient::new(redis_url).await.unwrap();
     let node_client = NodeClient::new(redis_url).await;
-    let transak = TransakClient::new(settings.transak.key.public);
-    let moonpay = MoonPayClient::new(  settings.moonpay.key.public,  settings.moonpay.key.secret);
-    let mercuryo = MercuryoClient::new(settings.mercuryo.key.public);
+    let request_client = FiatClient::request_client(settings.fiat.timeout);
+    let transak = TransakClient::new(request_client.clone(), settings.transak.key.public);
+    let moonpay = MoonPayClient::new( request_client.clone(),  settings.moonpay.key.public,  settings.moonpay.key.secret);
+    let mercuryo = MercuryoClient::new(request_client.clone(), settings.mercuryo.key.public);
     let fiat_client = FiatClient::new(
         redis_url,
         transak,

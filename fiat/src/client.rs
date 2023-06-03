@@ -1,4 +1,5 @@
 use std::error::Error;
+use std::time::Duration;
 
 use crate::model::{FiatQuote, FiatProviderName, FiatRequest, FiatAssets, FiatMappingMap};
 use crate::moonpay::MoonPayClient;
@@ -6,6 +7,7 @@ use crate::transak::TransakClient;
 use crate::mercuryo::MercuryoClient;
 use futures::future::join_all;
 use redis_client::RedisClient;
+use reqwest::Client as RequestClient;
 
 const ASSETS_KEY: &str = "fiat:assets";
 const MAPPING_PREFIX: &str = "fiat:mapping";
@@ -32,6 +34,12 @@ impl Client {
             moonpay,
             mercuryo
         }
+    }
+
+    pub fn request_client(timeout_seconds: u64) -> RequestClient {
+        return RequestClient::builder()
+            .timeout(Duration::from_secs(timeout_seconds))
+            .build().unwrap()
     }
 
     pub async fn get_assets(&mut self) -> Result<FiatAssets, Box<dyn Error + Send + Sync>> {

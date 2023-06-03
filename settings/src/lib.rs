@@ -5,11 +5,18 @@ use serde::Deserialize;
 #[allow(unused)]
 pub struct Settings {
     pub redis: Redis,
+    pub fiat: Fiat,
     pub moonpay: MoonPay,
     pub transak: Transak,
     pub mercuryo: Mercuryo,
     pub coingecko: CoinGecko,
     pub pricer: Pricer,
+}
+
+#[derive(Debug, Deserialize)]
+#[allow(unused)]
+pub struct Fiat {
+    pub timeout: u64,
 }
 
 #[derive(Debug, Deserialize)]

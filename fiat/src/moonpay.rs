@@ -30,8 +30,7 @@ pub struct MoonPayClient {
 }
 
 impl MoonPayClient {
-    pub fn new(api_key: String, secret_key: String) -> Self {
-        let client = Client::new();
+    pub fn new(client: Client, api_key: String, secret_key: String) -> Self {
         Self { client, api_key, secret_key}
     }
 

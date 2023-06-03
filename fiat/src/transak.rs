@@ -39,8 +39,7 @@ pub struct TransakClient {
 }
 
 impl TransakClient {
-    pub fn new(api_key: String) -> Self {
-        let client = Client::new();
+    pub fn new(client: Client, api_key: String) -> Self {
         TransakClient { client, api_key }
     }
 

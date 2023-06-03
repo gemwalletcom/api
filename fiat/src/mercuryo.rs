@@ -23,9 +23,9 @@ pub struct MercuryoClient {
 }
 
 impl MercuryoClient {
-    pub fn new(widget_id: String) -> Self {
+    pub fn new(client: Client, widget_id: String) -> Self {
         MercuryoClient {
-            client: Client::new(),
+            client,
             widget_id,
         }
     }
