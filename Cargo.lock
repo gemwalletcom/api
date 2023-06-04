@@ -223,6 +223,7 @@ dependencies = [
 name = "deamon"
 version = "1.0.0"
 dependencies = [
+ "fiat",
  "pricer",
  "serde",
  "serde_json",

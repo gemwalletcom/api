@@ -61,6 +61,11 @@ impl RedisClient {
 
         Ok(results)
     }
+
+    pub async fn get_keys(&mut self, prefix: &str) -> Result<Vec<String>, Box<dyn Error>>  {
+        let keys: Vec<String> = self.conn.keys(format!("{}*", prefix)).await?;
+        Ok(keys)
+    }
 }
 
 

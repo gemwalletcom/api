@@ -1,16 +1,13 @@
 use std::error::Error;
 use std::time::Duration;
 
-use crate::model::{FiatQuote, FiatProviderName, FiatRequest, FiatAssets, FiatMappingMap};
+use crate::model::{FiatQuote, FiatProviderName, FiatRequest, FiatAssets, FiatMappingMap, MAPPING_PREFIX, ASSETS_KEY};
 use crate::moonpay::MoonPayClient;
 use crate::transak::TransakClient;
 use crate::mercuryo::MercuryoClient;
 use futures::future::join_all;
 use redis_client::RedisClient;
 use reqwest::Client as RequestClient;
-
-const ASSETS_KEY: &str = "fiat:assets";
-const MAPPING_PREFIX: &str = "fiat:mapping";
 
 pub struct Client {
     store: RedisClient,

@@ -1,6 +1,9 @@
 use std::collections::HashMap;
 use serde::{Deserialize, Serialize};
 
+pub const ASSETS_KEY: &str = "fiat:assets";
+pub const MAPPING_PREFIX: &str = "fiat:mapping";
+
 #[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct FiatQuote {
