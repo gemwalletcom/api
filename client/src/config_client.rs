@@ -7,8 +7,10 @@ const CONFIG_TOKENLIST_PREFIX: &str = "config:tokenlists:";
 //TODO: Move client to separate folder
 
 #[derive(Debug, Deserialize, Serialize)]
+#[serde(rename_all = "camelCase")]
 pub struct ConfigResponse {
-    pub tokenlists: Vec<TokenListVersion>
+    pub fiat_assets_version: i32,
+    pub token_lists: Vec<TokenListVersion>
 }
 
 #[derive(Debug, Deserialize, Serialize)]
@@ -32,7 +34,12 @@ impl Client {
     }
 
     pub async fn get_config(&mut self) -> Result<ConfigResponse, Box<dyn Error>> {
-        let token_list: Vec<TokenListVersion> = self.store.get_values(CONFIG_TOKENLIST_PREFIX).await.unwrap();
-        return Ok(ConfigResponse{tokenlists: token_list})
+        let token_lists: Vec<TokenListVersion> = self.store.get_values(CONFIG_TOKENLIST_PREFIX).await.unwrap();
+        let response = ConfigResponse{
+            //TODO fetch fiat assets version from db
+            fiat_assets_version: 1,
+            token_lists
+        };
+        return Ok(response)
     }
 }
