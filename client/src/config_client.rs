@@ -2,7 +2,7 @@ use std::error::Error;
 use redis_client::RedisClient;
 use serde::{Serialize, Deserialize};
 
-const CONFIG_TOKENLIST_PREFIX: &str = "config:tokenlist:";
+const CONFIG_TOKENLIST_PREFIX: &str = "config:tokenlists:";
 
 //TODO: Move client to separate folder
 
