@@ -11,6 +11,7 @@ const CONFIG_TOKENLIST_PREFIX: &str = "config:tokenlists:";
 pub struct ConfigResponse {
     pub nodes_version: i32,
     pub fiat_assets_version: i32,
+    pub token_lists_version: i32,
     pub token_lists: Vec<TokenListVersion>
 }
 
@@ -36,10 +37,16 @@ impl Client {
 
     pub async fn get_config(&mut self) -> Result<ConfigResponse, Box<dyn Error>> {
         let token_lists: Vec<TokenListVersion> = self.store.get_values(CONFIG_TOKENLIST_PREFIX).await.unwrap();
+        let token_lists_version: i32 = token_lists
+            .iter()
+            .map(|token_list| token_list.version)
+            .sum();
+        
         let response = ConfigResponse{
             //TODO fetch fiat assets version from db
             nodes_version: 1,
             fiat_assets_version: 1,
+            token_lists_version,
             token_lists
         };
         return Ok(response)
