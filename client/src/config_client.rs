@@ -9,6 +9,7 @@ const CONFIG_TOKENLIST_PREFIX: &str = "config:tokenlists:";
 #[derive(Debug, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ConfigResponse {
+    pub nodes_version: i32,
     pub fiat_assets_version: i32,
     pub token_lists: Vec<TokenListVersion>
 }
@@ -37,6 +38,7 @@ impl Client {
         let token_lists: Vec<TokenListVersion> = self.store.get_values(CONFIG_TOKENLIST_PREFIX).await.unwrap();
         let response = ConfigResponse{
             //TODO fetch fiat assets version from db
+            nodes_version: 1,
             fiat_assets_version: 1,
             token_lists
         };
