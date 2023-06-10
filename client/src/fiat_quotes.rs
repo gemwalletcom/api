@@ -1,7 +1,6 @@
 extern crate rocket;
 use rocket::State;
 use rocket::serde::json::Json;
-use rocket_client_addr::ClientRealAddr;
 use fiat::model::{FiatQuote, FiatRequest, FiatAssets};
 use fiat::client::Client as FiatClient;
 use serde::Serialize;
@@ -19,12 +18,12 @@ pub async fn get_fiat_quotes(
     currency: String, 
     wallet_address: String,
     ip_address: Option<String>,
-    client_addr: &ClientRealAddr,
+    ip: std::net::IpAddr,
     fiat_client: &State<Mutex<FiatClient>>,
 ) -> Json<FiatQuotes> {
     let request: FiatRequest = FiatRequest{
         asset_id: asset_id.clone(), 
-        ip_address: ip_address.unwrap_or(client_addr.get_ipv4_string().unwrap()),
+        ip_address: ip_address.unwrap_or(ip.to_string()),
         amount,
         currency,
         wallet_address,

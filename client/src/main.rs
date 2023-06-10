@@ -7,6 +7,7 @@ mod nodes;
 mod node_client;
 mod config;
 mod config_client;
+mod plausible_client;
 
 use fiat::mercuryo::MercuryoClient;
 use fiat::moonpay::MoonPayClient;
@@ -18,6 +19,7 @@ use settings::Settings;
 use pricer::client::Client as PriceClient;
 use fiat::client::Client as FiatClient;
 use config_client::Client as ConfigClient;
+use plausible_client:: Client as PlausibleClient;
 
 use rocket::tokio::sync::Mutex;
 
@@ -26,6 +28,7 @@ async fn rocket(settings: Settings) -> Rocket<Build> {
     let price_client = PriceClient::new(redis_url).await.unwrap();
     let node_client = NodeClient::new(redis_url).await;
     let config_client = ConfigClient::new(redis_url).await;
+    let plausible_client = PlausibleClient::new(&settings.plausible.url);
     let request_client = FiatClient::request_client(settings.fiat.timeout);
     let transak = TransakClient::new(request_client.clone(), settings.transak.key.public);
     let moonpay = MoonPayClient::new( request_client.clone(),  settings.moonpay.key.public,  settings.moonpay.key.secret);
@@ -49,6 +52,7 @@ async fn rocket(settings: Settings) -> Rocket<Build> {
         .manage(Mutex::new(price_client))
         .manage(Mutex::new(node_client))
         .manage(Mutex::new(config_client))
+        .manage(Mutex::new(plausible_client))
         .mount("/", routes![
             status::get_status,
         ])

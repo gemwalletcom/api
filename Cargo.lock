@@ -133,7 +133,6 @@ dependencies = [
  "pricer",
  "redis_client",
  "rocket",
- "rocket-client-addr",
  "serde",
  "serde_json",
  "settings",
@@ -1354,15 +1353,6 @@ dependencies = [
  "ubyte",
  "version_check",
  "yansi",
-]
-
-[[package]]
-name = "rocket-client-addr"
-version = "0.5.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "8cb54a6e3dd696465c8a47fa61603b49e28cf475133a3d082902c2d4eaae9df1"
-dependencies = [
- "rocket",
 ]
 
 [[package]]

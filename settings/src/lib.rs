@@ -11,6 +11,7 @@ pub struct Settings {
     pub mercuryo: Mercuryo,
     pub coingecko: CoinGecko,
     pub pricer: Pricer,
+    pub plausible: Plausible,
 }
 
 #[derive(Debug, Deserialize)]
@@ -72,6 +73,12 @@ pub struct CoinGecko {
 #[allow(unused)]
 pub struct Pricer {
     pub timer: u64,
+}
+
+#[derive(Debug, Deserialize)]
+#[allow(unused)]
+pub struct Plausible {
+    pub url: String,
 }
 
 impl Settings {
