@@ -41,7 +41,15 @@ impl PriceUpdater {
                     if value.id() == Chain::Binance.id() {
                         prices.push(
                             asset_price_map(Chain::SmartChain.id().to_string(), market.clone())
-                        )
+                        );
+                    }
+                    if value.id() == Chain::Ethereum.id() {
+                        prices.push(
+                            asset_price_map(Chain::Arbitrum.id().to_string(), market.clone())
+                        );
+                        prices.push(
+                            asset_price_map(Chain::Optimism.id().to_string(), market.clone())
+                        );
                     }
                 }
                 None=> {
