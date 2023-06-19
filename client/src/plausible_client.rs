@@ -1,3 +1,4 @@
+
 pub struct Client {
     base_url: String,
 }

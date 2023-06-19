@@ -17,10 +17,10 @@ impl PriceUpdater {
         }
     }
 
-    pub async fn update_prices(&mut self)  {
-        let coin_list = self.coin_gecko_client.get_coin_list().await.unwrap_or_default();
+    pub async fn update_prices(&mut self) ->  Result<usize, Box<dyn std::error::Error>>  {
+        let coin_list = self.coin_gecko_client.get_coin_list().await?;
         let coins_map = CoinGeckoClient::convert_coin_vec_to_map(coin_list.clone());
-        let coin_markets = self.coin_gecko_client.get_all_coin_markets(250, 10).await.unwrap_or_default();
+        let coin_markets = self.coin_gecko_client.get_all_coin_markets(250, 10).await?;
 
         println!("coin_list: {}", coin_list.len());
         println!("coin_markets: {}", coin_markets.len());
@@ -28,7 +28,7 @@ impl PriceUpdater {
         let mut prices: Vec<AssetPrice> = Vec::new();
 
         for market in coin_markets {
-            let coin_map = coins_map.get(market.id.as_str()).unwrap();
+            
             let chain = get_chain(market.id.as_str());
             
             match chain {
@@ -53,6 +53,7 @@ impl PriceUpdater {
                     }
                 }
                 None=> {
+                    let coin_map = coins_map.get(market.id.as_str()).unwrap();
                     for (platform, token_id) in coin_map.platforms.clone().into_iter() {
                         let platform = get_chain(platform.as_str());
                         match platform {
@@ -72,10 +73,11 @@ impl PriceUpdater {
             }
         }
 
-    let count = self.price_client.set_assets_prices(prices).await;
+    let count = self.price_client.set_assets_prices(prices).await?;
 
     println!("set_assets_prices: {:?} assets", count);
 
+    return Ok(count)
     }
 }
 
