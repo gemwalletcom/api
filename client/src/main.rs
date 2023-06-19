@@ -12,6 +12,7 @@ mod plausible_client;
 use fiat::mercuryo::MercuryoClient;
 use fiat::moonpay::MoonPayClient;
 use fiat::transak::TransakClient;
+use fiat::ramp::RampClient;
 use node_client::Client as NodeClient;
 use rocket::fairing::AdHoc;
 use rocket::{Build, Rocket};
@@ -33,11 +34,13 @@ async fn rocket(settings: Settings) -> Rocket<Build> {
     let transak = TransakClient::new(request_client.clone(), settings.transak.key.public);
     let moonpay = MoonPayClient::new( request_client.clone(),  settings.moonpay.key.public,  settings.moonpay.key.secret);
     let mercuryo = MercuryoClient::new(request_client.clone(), settings.mercuryo.key.public);
+    let ramp = RampClient::new(request_client.clone(), settings.ramp.key.public);
     let fiat_client = FiatClient::new(
         redis_url,
         transak,
         moonpay,
         mercuryo,
+        ramp
     ).await;
 
     rocket::build()

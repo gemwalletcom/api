@@ -82,15 +82,12 @@ impl MoonPayClient {
         Ok(ip_address_result)
     }
 
-    
-
     fn get_fiat_quote(&self, request: FiatRequest, quote: MoonPayBuyQuote) -> FiatQuote {
         return FiatQuote{
             provider: self.name().as_fiat_provider(),
             fiat_amount: request.clone().amount,
             fiat_currency: request.clone().currency,
             crypto_amount: quote.quote_currency_amount,
-            crypto_currency: quote.quote_currency_code.to_uppercase(),
             redirect_url: self.redirect_url(request.clone(), quote),
         }
     }

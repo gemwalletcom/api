@@ -20,6 +20,10 @@ public = ""
 [mercuryo.key]
 public = ""
 
+[ramp]
+[ramp.key]
+public = ""
+
 [pricer]
 timer = 180
 

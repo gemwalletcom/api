@@ -51,7 +51,6 @@ impl MercuryoClient {
             fiat_amount: request.amount,
             fiat_currency: request.currency,
             crypto_amount: precision(quote.clone().amount.parse::<f64>().unwrap_or_default(), 5),
-            crypto_currency: quote.clone().currency,
             redirect_url: self.redirect_url(quote.clone(), request.wallet_address),
         }
     }

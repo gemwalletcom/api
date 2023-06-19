@@ -11,7 +11,6 @@ pub struct FiatQuote {
     pub fiat_amount: f64,
     pub fiat_currency: String,
     pub crypto_amount: f64,
-    pub crypto_currency: String,
     pub redirect_url: String,
 }
 
@@ -33,6 +32,7 @@ pub enum FiatProviderName {
     Mercuryo,
     Transak,
     MoonPay,
+    Ramp,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -48,23 +48,14 @@ impl FiatProviderName {
             FiatProviderName::Mercuryo => "Mercuryo",
             FiatProviderName::Transak => "Transak",
             FiatProviderName::MoonPay => "MoonPay",
+            FiatProviderName::Ramp => "Ramp",
         }
     }
 
     pub fn as_fiat_provider(&self) -> FiatProvider {
-        match self {
-            FiatProviderName::Mercuryo => FiatProvider { 
-                name: self.as_str().to_string(),
-                image_url: "".to_string(),
-            },
-            FiatProviderName::Transak => FiatProvider { 
-                name: self.as_str().to_string(),
-                image_url: "".to_string(),
-            },
-            FiatProviderName::MoonPay => FiatProvider { 
-                name: self.as_str().to_string(),
-                image_url: "".to_string(),
-            },
+        return FiatProvider { 
+            name: self.as_str().to_string(),
+            image_url: "".to_string(),
         }
     }
 }

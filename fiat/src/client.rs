@@ -5,6 +5,7 @@ use crate::model::{FiatQuote, FiatProviderName, FiatRequest, FiatAssets, FiatMap
 use crate::moonpay::MoonPayClient;
 use crate::transak::TransakClient;
 use crate::mercuryo::MercuryoClient;
+use crate::ramp::RampClient;
 use futures::future::join_all;
 use redis_client::RedisClient;
 use reqwest::Client as RequestClient;
@@ -14,6 +15,7 @@ pub struct Client {
     transak: TransakClient,
     moonpay: MoonPayClient,
     mercuryo: MercuryoClient,
+    ramp: RampClient,
 }
 
 impl Client {
@@ -21,7 +23,8 @@ impl Client {
         redis_url: &str,
         transak: TransakClient, 
         moonpay: MoonPayClient,
-        mercuryo: MercuryoClient
+        mercuryo: MercuryoClient,
+        ramp: RampClient
     ) -> Self {
         let store = RedisClient::new(redis_url).await.unwrap();
 
@@ -29,7 +32,8 @@ impl Client {
             store,
             transak,
             moonpay,
-            mercuryo
+            mercuryo,
+            ramp
         }
     }
 
@@ -53,6 +57,7 @@ impl Client {
             self.get_quote(request.clone(), FiatProviderName::Transak, fiat_mapping_map.clone()),
             self.get_quote(request.clone(), FiatProviderName::Mercuryo, fiat_mapping_map.clone()),
             self.get_quote(request.clone(), FiatProviderName::MoonPay, fiat_mapping_map.clone()),
+            self.get_quote(request.clone(), FiatProviderName::Ramp, fiat_mapping_map.clone()),
         ];
 
         let results = join_all(futures).await.into_iter().flatten().collect();
@@ -83,6 +88,16 @@ impl Client {
                         match value {
                             Ok(value) => { return Ok(value) }
                             Err(_) => { return Err("".into()) }
+                        }
+                    },
+                    FiatProviderName::Ramp => {
+                        let value = self.ramp.get_quote(request.clone(), mapping.clone()).await;
+                        match value {
+                            Ok(value) => { return Ok(value) }
+                            Err(ee) => { 
+                                println!("error {}", ee);
+                                return Err("".into()) 
+                            }
                         }
                     },
                 }

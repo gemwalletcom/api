@@ -65,7 +65,6 @@ impl TransakClient {
             fiat_amount: request.amount,
             fiat_currency: request.currency,
             crypto_amount: quote.crypto_amount,
-            crypto_currency: quote.crypto_currency.clone(),
             redirect_url: self.redirect_url(quote, request.wallet_address),
         }
     }
