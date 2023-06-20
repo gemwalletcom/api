@@ -16,7 +16,7 @@ pub struct ChainNode {
 pub struct Node {
     pub url: String,
     pub status: String,
-    pub priority: String,
+    pub priority: i32,
 }
 
 pub struct Client {
