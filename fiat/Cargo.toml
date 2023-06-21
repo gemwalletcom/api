@@ -12,7 +12,7 @@ reqwest = { workspace = true }
 url = { workspace = true }
 rust_decimal = { workspace = true }
 hmac = "0.12.1"
-sha2 = "0.10.6"
+sha2 = "0.10.7"
 base64 = "0.21.2"
 futures = "0.3.28"
 redis_client = { path = "../redis_client" }
