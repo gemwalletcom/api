@@ -61,6 +61,7 @@ impl FiatProviderName {
 }
 
 #[derive(Debug, Deserialize, Serialize)]
+#[serde(rename_all = "camelCase")]
 pub struct FiatProvider {
     pub name: String,
     pub image_url: String,
