@@ -53,17 +53,12 @@ impl Client {
             .iter()
             .map(|token_list| token_list.version)
             .sum();
-        
-        let ios_version = self.store.get_value("config:ios_version").await.unwrap();
-        let android_version = self.store.get_value("config:android_version").await.unwrap();
+        let app = self.store.get_value("config:app").await.unwrap();
 
         let response = ConfigResponse{
             //TODO fetch fiat assets version from db
             nodes_version: 1,
-            app: App { 
-                ios: ios_version,
-                android: android_version,
-            },
+            app,
             fiat_assets_version: 1,
             token_lists_version,
             token_lists
