@@ -4,7 +4,7 @@ use serde::{Deserialize, Serialize};
 pub const ASSETS_KEY: &str = "fiat:assets";
 pub const MAPPING_PREFIX: &str = "fiat:mapping";
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Debug, Deserialize, Serialize, Clone)]
 #[serde(rename_all = "camelCase")]
 pub struct FiatQuote {
     pub provider: FiatProvider,
@@ -60,7 +60,7 @@ impl FiatProviderName {
     }
 }
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Debug, Deserialize, Serialize, Clone)]
 #[serde(rename_all = "camelCase")]
 pub struct FiatProvider {
     pub name: String,

@@ -50,7 +50,7 @@ impl MercuryoClient {
             provider: self.name().as_fiat_provider(),
             fiat_amount: request.amount,
             fiat_currency: request.currency,
-            crypto_amount: precision(quote.clone().amount.parse::<f64>().unwrap_or_default(), 5),
+            crypto_amount: quote.clone().amount.parse::<f64>().unwrap_or_default(),
             redirect_url: self.redirect_url(quote.clone(), request.wallet_address),
         }
     }
@@ -71,20 +71,5 @@ impl MercuryoClient {
 impl FiatClient for MercuryoClient {
     fn name(&self) -> FiatProviderName {
         return FiatProviderName::Mercuryo
-    }
-}
-
-fn precision(val: f64, precision: usize) -> f64 {
-    format!("{:.prec$}", val, prec = precision).parse::<f64>().unwrap()
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test_precision() {
-        assert_eq!(precision(1.123, 2), 1.12);
-        assert_eq!(precision(1.123, 5), 1.123);
     }
 }

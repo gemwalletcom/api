@@ -60,7 +60,17 @@ impl Client {
             self.get_quote(request.clone(), FiatProviderName::Ramp, fiat_mapping_map.clone()),
         ];
 
-        let results = join_all(futures).await.into_iter().flatten().collect();
+        let results: Vec<FiatQuote> = join_all(futures)
+            .await
+            .into_iter()
+            .flatten()
+            .map(|quote| {
+                let mut result = quote.clone();
+                result.crypto_amount = precision(quote.crypto_amount, 5);
+                return result
+            })
+            .collect();
+
         return Ok(results);
     }
     
@@ -107,4 +117,19 @@ impl Client {
             }
         }
     } 
+}
+
+fn precision(val: f64, precision: usize) -> f64 {
+    format!("{:.prec$}", val, prec = precision).parse::<f64>().unwrap()
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_precision() {
+        assert_eq!(precision(1.123, 2), 1.12);
+        assert_eq!(precision(1.123, 5), 1.123);
+    }
 }
