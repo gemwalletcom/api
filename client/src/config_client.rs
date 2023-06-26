@@ -17,11 +17,15 @@ pub struct ConfigResponse {
 }
 
 #[derive(Debug, Deserialize, Serialize)]
+#[serde(rename_all = "camelCase")]
 pub struct AppVersion {
-    pub version: String
+    pub version: String,
+    pub beta_version: String,
+    pub alpha_version: String,
 }
 
 #[derive(Debug, Deserialize, Serialize)]
+#[serde(rename_all = "camelCase")]
 pub struct App {
     pub ios: AppVersion,
     pub android: AppVersion,
