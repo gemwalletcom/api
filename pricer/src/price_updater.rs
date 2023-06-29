@@ -163,7 +163,7 @@ fn get_chain(id: &str) -> Option<Chain> {
         "thorchain" => Some(Chain::Thorchain),
         "cosmos" => Some(Chain::Cosmos),
         "osmosis" => Some(Chain::Osmosis),
-        "toncoin" => Some(Chain::Ton),
+        "the-open-network" => Some(Chain::Ton),
         _ => {
             None
         }
