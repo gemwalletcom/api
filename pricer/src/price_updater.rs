@@ -94,6 +94,7 @@ pub enum Chain {
     Thorchain,
     Cosmos,
     Osmosis,
+    Ton,
 }
 
 impl Chain {
@@ -110,6 +111,7 @@ impl Chain {
             Chain::Thorchain => "thorchain",
             Chain::Cosmos => "cosmos",
             Chain::Osmosis => "osmosis",
+            Chain::Ton => "ton",
         }
     }
 }
@@ -161,6 +163,7 @@ fn get_chain(id: &str) -> Option<Chain> {
         "thorchain" => Some(Chain::Thorchain),
         "cosmos" => Some(Chain::Cosmos),
         "osmosis" => Some(Chain::Osmosis),
+        "toncoin" => Some(Chain::Ton),
         _ => {
             None
         }

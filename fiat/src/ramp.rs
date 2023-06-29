@@ -114,11 +114,11 @@ pub struct Quote {
 #[derive(Debug, Deserialize, Clone)]
 #[serde(rename_all = "camelCase")]
 pub struct QuoteData {
-    fiat_currency: String,
+    //fiat_currency: String,
     crypto_amount: String,
-    fiat_value: u32,
-    base_ramp_fee: f64,
-    applied_fee: f64,
+    //fiat_value: u32,
+    //base_ramp_fee: f64,
+    //applied_fee: f64,
 }
 
 #[derive(Debug, Deserialize, Clone)]
@@ -127,8 +127,8 @@ pub struct QuoteAsset {
     symbol: String,
     chain: String,
     decimals: u32,
-    enabled: bool,
-	hidden: bool,
+    //enabled: bool,
+	//hidden: bool,
 }
 
 #[derive(Debug, Deserialize, Clone)]

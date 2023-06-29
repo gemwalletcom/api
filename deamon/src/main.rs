@@ -15,9 +15,9 @@ pub async fn main() {
     let mut fiat_updater = FiatUpdater::new(&settings.redis.url).await;
 
     loop {
-        price_updater.update_prices().await;
+        let _ = price_updater.update_prices().await;
 
-        fiat_updater.update_assets().await;
+        let _ = fiat_updater.update_assets().await;
         
         thread::sleep(Duration::from_secs(settings.pricer.timer));
     }
